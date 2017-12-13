@@ -1,4 +1,4 @@
-package life.sucks.org.structurednotepad;
+package tech.asfaw.ethiochallenge;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
