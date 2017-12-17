@@ -10,20 +10,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class CSVParser {
+class CSVParser {
 
     private InputStream mInputStream;
 
-    public CSVParser(InputStream inputStream){
+    CSVParser(InputStream inputStream){
         this.mInputStream = inputStream;
     }
 
     private List<Challenge> mChallenges;
 
-    public List<Challenge> getChallengesFromCSV(){
+    List<Challenge> getChallengesFromCSV(){
         mChallenges = new ArrayList<>();
         List resultList = new ArrayList();
-        String[] choicePool = {};
+        List choicePool = new ArrayList();
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(mInputStream));
 
@@ -48,16 +48,22 @@ public class CSVParser {
             String[] stat = (String[]) resultList.get(i);
             Log.i("ጥያቄ： ", stat[0]);
             Log.i("መልስ： ", stat[1]);
-            choicePool[i] = stat[1];
+            choicePool.add(stat[1]);
         }
 
         Random rand = new Random();
         for (int i=0; i < resultList.size(); i++){
             String[] stat = (String[]) resultList.get(i);
             String[] options = {stat[1]};
-            options[1] = choicePool[rand.nextInt(resultList.size())];
-            options[2] = choicePool[rand.nextInt(resultList.size())];
-            options[3] = choicePool[rand.nextInt(resultList.size())];
+            int ch1 = rand.nextInt(resultList.size());
+            options[1] = (String) choicePool.get(ch1);
+            choicePool.remove(ch1);
+            int ch2 = rand.nextInt(resultList.size());
+            options[2] = (String) choicePool.get(ch2);
+            choicePool.remove(ch2);
+            int ch3 = rand.nextInt(resultList.size());
+            options[3] = (String) choicePool.get(ch3);
+            choicePool.remove(ch2);
             mChallenges.add(new Challenge(stat[0], options, 0));
         }
 
