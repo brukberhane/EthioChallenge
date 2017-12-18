@@ -55,6 +55,7 @@ class CSVParser {
         for (int i=0; i < resultList.size(); i++){
             String[] stat = (String[]) resultList.get(i);
             String[] options = {stat[1]};
+            choicePool.remove(stat[1]);
             int ch1 = rand.nextInt(resultList.size());
             options[1] = (String) choicePool.get(ch1);
             choicePool.remove(ch1);
@@ -67,7 +68,7 @@ class CSVParser {
             mChallenges.add(new Challenge(stat[0], options, 0));
         }
 
-        return null;
+        return mChallenges;
 
     }
 

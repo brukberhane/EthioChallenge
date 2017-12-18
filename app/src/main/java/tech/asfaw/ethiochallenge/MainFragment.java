@@ -6,12 +6,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.List;
+
+import tech.asfaw.ethiochallenge.models.Challenge;
 import tech.asfaw.ethiochallenge.models.ChallengeLab;
+
 
 public class MainFragment extends Fragment {
 
     private ChallengeLab mChallengeLab;
+    private List<Challenge> mChallenges;
 
     public MainFragment(){
         // Required public constructor
@@ -31,7 +37,9 @@ public class MainFragment extends Fragment {
         text.setTextSize(20);
 
         mChallengeLab = new ChallengeLab(getActivity());
-        mChallengeLab.getChallenges();
+        mChallenges = mChallengeLab.getChallenges();
+        Challenge tchallenge = mChallenges.get(0);
+        Toast.makeText(getActivity(), tchallenge.getQuestion(), Toast.LENGTH_SHORT).show();
 
         return v;
     }
