@@ -16,7 +16,9 @@ import tech.asfaw.ethiochallenge.models.ChallengeLab;
 
 public class MainFragment extends Fragment {
 
+    @SuppressWarnings("FieldCanBeLocal")
     private ChallengeLab mChallengeLab;
+    @SuppressWarnings("FieldCanBeLocal")
     private List<Challenge> mChallenges;
 
     public MainFragment(){
