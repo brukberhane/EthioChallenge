@@ -1,4 +1,4 @@
-package tech.asfaw.ethiochallenge.Models;
+package tech.asfaw.ethiochallenge.models;
 
 import android.content.Context;
 
