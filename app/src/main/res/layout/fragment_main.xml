@@ -2,12 +2,49 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              xmlns:card_view="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical">
 
     <TextView
         android:id="@+id/text_view_fragment_main"
-        android:text="Hello World!"
-        android:layout_width="wrap_content"
+        android:text="Hello World! - Answer this question to move on."
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        card_view:cardCornerRadius="2dp"
+        card_view:contentPadding="10dp"
+        card_view:contentPaddingBottom="10dp"
+        android:paddingTop="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <TextView
+            android:id="@+id/question_text"
+            android:text="Answer This question!"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/first_choice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="First option"/>
+        <Button
+            android:id="@+id/second_choice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Second option"/>
+        <Button
+            android:id="@+id/third_choice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Third option"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>
