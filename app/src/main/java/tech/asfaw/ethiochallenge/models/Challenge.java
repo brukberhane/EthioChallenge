@@ -1,9 +1,12 @@
 package tech.asfaw.ethiochallenge.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Challenge {
 
     private String mQuestion;
-    private String[] mOptions = new String[4];
+    private List<String> mOptions = new ArrayList<>();
     private int mAnswerLocation;
 
     public int getAnswerLocation() {
@@ -14,11 +17,11 @@ public class Challenge {
         return mQuestion;
     }
 
-    public String[] getOptions() {
+    public List<String> getOptions() {
         return mOptions;
     }
 
-    public Challenge(String question, String[] options, int answerLocation) {
+    public Challenge(String question, List<String> options, int answerLocation) {
         mQuestion = question;
         mOptions = options;
         mAnswerLocation = answerLocation;

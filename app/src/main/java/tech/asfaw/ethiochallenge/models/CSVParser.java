@@ -10,20 +10,62 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class CSVParser {
+class CSVParser {
 
     private InputStream mInputStream;
 
-    public CSVParser(InputStream inputStream){
+    CSVParser(InputStream inputStream){
         this.mInputStream = inputStream;
     }
 
-    private List<Challenge> mChallenges;
+    List<Challenge> getChallengesFromCSV(){
+        List<String[]> listofArrays = getListofRows();
+        List<String> choicePool = populateChoicePool(listofArrays);
 
-    public List<Challenge> getChallengesFromCSV(){
-        mChallenges = new ArrayList<>();
-        List resultList = new ArrayList();
-        String[] choicePool = {};
+        return createChallenges(listofArrays, choicePool);
+    }
+
+    private List<Challenge> createChallenges(List<String[]> listofArrays, List<String> choicePool) {
+        List<Challenge> challenges = new ArrayList<>();
+        Random rand = new Random();
+        for (int i = 0; i < listofArrays.size(); i++){
+            String[] stat = listofArrays.get(i);
+            List<String> tempChoicePool = new ArrayList<>(choicePool);
+            List<String> options = new ArrayList<>();
+            options.add(stat[1]);
+            tempChoicePool.remove(stat[1]);
+            int ch1 = rand.nextInt(tempChoicePool.size());
+            Log.i("1 ችግር： ", String.valueOf(ch1));
+            options.add(tempChoicePool.get(ch1));
+            tempChoicePool.remove(ch1);
+            int ch2 = rand.nextInt(tempChoicePool.size());
+            Log.i("2 ችግር： ", String.valueOf(ch2));
+            options.add(tempChoicePool.get(ch2));
+            tempChoicePool.remove(ch2);
+            int ch3 = rand.nextInt(tempChoicePool.size());
+            Log.i("3 ችግር： ", String.valueOf(ch3));
+            options.add(tempChoicePool.get(ch3));
+            tempChoicePool.remove(ch3);
+            challenges.add(new Challenge(stat[0], options, 0));
+        }
+        return challenges;
+    }
+
+    private List<String> populateChoicePool(List<String[]> listofArrays) {
+        List<String> choicePool = new ArrayList<>();
+
+        for (int i = 0; i < listofArrays.size(); i++){
+            String[] stat = listofArrays.get(i);
+            Log.i("ጥያቄ： ", stat[0]);
+            Log.i("መልስ： ", stat[1]);
+            choicePool.add(stat[1]);
+        }
+
+        return choicePool;
+    }
+
+    private List<String[]> getListofRows() {
+        List<String[]> resultList = new ArrayList<>();
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(mInputStream));
 
@@ -40,29 +82,12 @@ public class CSVParser {
             try{
                 mInputStream.close();
             } catch (IOException ex){
+                //noinspection ThrowFromFinallyBlock
                 throw new RuntimeException("Error while closing InputStream: "+ex);
             }
         }
 
-        for (int i=0; i < resultList.size(); i++){
-            String[] stat = (String[]) resultList.get(i);
-            Log.i("ጥያቄ： ", stat[0]);
-            Log.i("መልስ： ", stat[1]);
-            choicePool[i] = stat[1];
-        }
-
-        Random rand = new Random();
-        for (int i=0; i < resultList.size(); i++){
-            String[] stat = (String[]) resultList.get(i);
-            String[] options = {stat[1]};
-            options[1] = choicePool[rand.nextInt(resultList.size())];
-            options[2] = choicePool[rand.nextInt(resultList.size())];
-            options[3] = choicePool[rand.nextInt(resultList.size())];
-            mChallenges.add(new Challenge(stat[0], options, 0));
-        }
-
-        return null;
-
+        return resultList;
     }
 
 }
