@@ -5,11 +5,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import tech.asfaw.ethiochallenge.models.Challenge;
 import tech.asfaw.ethiochallenge.models.ChallengeLab;
 
@@ -20,6 +23,18 @@ public class MainFragment extends Fragment {
     private ChallengeLab mChallengeLab;
     @SuppressWarnings("FieldCanBeLocal")
     private List<Challenge> mChallenges;
+
+
+    @BindView(R.id.text_view_fragment_main)
+    TextView mFirstText;
+    @BindView(R.id.question_text)
+    TextView mQuestionText;
+    @BindView(R.id.first_choice)
+    Button mFirstChoiceButton;
+    @BindView(R.id.second_choice)
+    Button mSecondChoiceButton;
+    @BindView(R.id.third_choice)
+    Button mThirdChoiceButton;
 
     public MainFragment(){
         // Required public constructor
@@ -32,18 +47,22 @@ public class MainFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
-        View v = inflater.inflate(R.layout.fragment_main, container, false);
-
-        TextView text = (TextView) v.findViewById(R.id.text_view_fragment_main);
-        text.setText("ኣዲስ ኣፕሊኬሽን");
-        text.setTextSize(20);
+        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        ButterKnife.bind(this, view);
+        mFirstText.setText("ኣዲስ ኣፕሊኬሽን");
+        mFirstText.setTextSize(20);
 
         mChallengeLab = new ChallengeLab(getActivity());
         mChallenges = mChallengeLab.getChallenges();
         Challenge tchallenge = mChallenges.get(0);
-        Toast.makeText(getActivity(), tchallenge.getQuestion(), Toast.LENGTH_SHORT).show();
+        mQuestionText.setText(tchallenge.getQuestion());
+        mFirstChoiceButton.setText(tchallenge.getOptions().get(0));
+        mSecondChoiceButton.setText(tchallenge.getOptions().get(1));
+        mThirdChoiceButton.setText(tchallenge.getOptions().get(2));
 
-        return v;
+//        Toast.makeText(getActivity(), tchallenge.getQuestion(), Toast.LENGTH_SHORT).show();
+
+        return view;
     }
 
 }
