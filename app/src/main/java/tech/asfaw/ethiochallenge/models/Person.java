@@ -1,19 +1,29 @@
 package tech.asfaw.ethiochallenge.models;
 
-import java.util.HashMap;
-
 public class Person {
 
     private String mName;
     private int mQuestionsAnswered;
-    private HashMap<Challenge, String> mChallengeResults;
+//    private HashMap<Challenge, String> mChallengeResults;
+    private int mCorrect;
+    private int mWrong;
 
-    public HashMap<Challenge, String> getChallengeResults() {
-        return mChallengeResults;
+    public int getCorrect() {
+        return mCorrect;
     }
 
-    public void setChallengeResults(HashMap<Challenge, String> challengeResults) {
-        mChallengeResults = challengeResults;
+    public Person setCorrect(int correct) {
+        mCorrect = correct;
+        return this;
+    }
+
+    public int getWrong() {
+        return mWrong;
+    }
+
+    public Person setWrong(int wrong) {
+        mWrong = wrong;
+        return this;
     }
 
     public String getName() {

@@ -3,7 +3,6 @@ package tech.asfaw.ethiochallenge;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,12 +14,14 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import tech.asfaw.ethiochallenge.models.Challenge;
 import tech.asfaw.ethiochallenge.models.ChallengeLab;
 import tech.asfaw.ethiochallenge.models.Person;
+import tech.asfaw.ethiochallenge.models.UserLab;
 
 
 public class ChallengeFragment extends Fragment implements Button.OnClickListener{
@@ -63,7 +64,6 @@ public class ChallengeFragment extends Fragment implements Button.OnClickListene
         mPerson = new Person(DEFAULT_PLAYER_NAME);
         mCurrentQuestion = 0;
         mChallengeResult = new HashMap<>();
-        mPerson.setChallengeResults(mChallengeResult);
     }
 
     @Override
@@ -93,7 +93,7 @@ public class ChallengeFragment extends Fragment implements Button.OnClickListene
         switch (view.getId()){
 
             case R.id.first_choice:
-                mChallengeResult.put(mCurrentChallenge, mSecondChoiceButton.getText().toString());
+                mChallengeResult.put(mCurrentChallenge, mFirstChoiceButton.getText().toString());
                 break;
             case R.id.second_choice:
                 mChallengeResult.put(mCurrentChallenge, mSecondChoiceButton.getText().toString());
@@ -114,12 +114,29 @@ public class ChallengeFragment extends Fragment implements Button.OnClickListene
             nextQuestion(mCurrentQuestion);
         } else{
             //TODO: Implement results page.
+
+            calculateScore();
+            UserLab.getLab(getActivity()).saveUser(mPerson);
             Toast.makeText(getActivity(), "You're done! \\o/", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getActivity(), HomeActivity.class);
             getActivity().startActivity(intent);
         }
     }
+    private void calculateScore(){
+        //TODO move somwhere else later
+        int correct = 0;
+        int wrong = 0;
+        for(Map.Entry<Challenge, String> entry : mChallengeResult.entrySet()){
 
+            if (entry.getKey().getAnswer().equals(entry.getValue())){
+                correct ++;
+            }else {
+                wrong ++;
+            }
+        }
+        mPerson.setCorrect(correct);
+        mPerson.setWrong(wrong);
+    }
     private void nextQuestion(int num){
         mFirstText.setText(QUESTION_STRING + (num+1));
         mCurrentChallenge = mChallenges.get(num);
