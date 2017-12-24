@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.List;
@@ -91,22 +92,27 @@ public class ChallengeFragment extends Fragment implements Button.OnClickListene
 
             case R.id.first_choice:
                 mChallengeResult.put(mCurrentChallenge, mSecondChoiceButton.getText().toString());
+                break;
             case R.id.second_choice:
                 mChallengeResult.put(mCurrentChallenge, mSecondChoiceButton.getText().toString());
+                break;
             case R.id.third_choice:
-                mChallengeResult.put(mCurrentChallenge, mThirdChoiceButton.getText().toString())
+                mChallengeResult.put(mCurrentChallenge, mThirdChoiceButton.getText().toString());
+                break;
             case R.id.fourth_choice:
-
+                mChallengeResult.put(mCurrentChallenge, mFourthChoiceButton.getText().toString());
+                break;
             default:
-                Log.i(TAG, "I don't even know how this happened.");
+                Log.i(TAG, "I don't even know how there is no correct match for the selected button");
 
         }
 
-        if (mCurrentQuestion > mChallenges.size()-1){
+        if (mCurrentQuestion < mChallenges.size()-1){
             mCurrentQuestion++;
             nextQuestion(mCurrentQuestion);
         } else{
             //TODO: Implement results page.
+            Toast.makeText(getActivity(), "You're done! \\o/", Toast.LENGTH_SHORT).show();
         }
     }
 
