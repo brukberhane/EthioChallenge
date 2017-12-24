@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ import tech.asfaw.ethiochallenge.models.Challenge;
 import tech.asfaw.ethiochallenge.models.ChallengeLab;
 
 
-public class MainFragment extends Fragment {
+public class ChallengeFragment extends Fragment {
 
     @SuppressWarnings("FieldCanBeLocal")
     private ChallengeLab mChallengeLab;
@@ -36,7 +35,7 @@ public class MainFragment extends Fragment {
     @BindView(R.id.third_choice)
     Button mThirdChoiceButton;
 
-    public MainFragment(){
+    public ChallengeFragment(){
         // Required public constructor
     }
 
@@ -47,7 +46,7 @@ public class MainFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_challenge, container, false);
         ButterKnife.bind(this, view);
         mFirstText.setText("ኣዲስ ኣፕሊኬሽን");
         mFirstText.setTextSize(20);
