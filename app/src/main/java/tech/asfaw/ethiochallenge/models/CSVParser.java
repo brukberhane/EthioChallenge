@@ -46,7 +46,7 @@ class CSVParser {
             Log.i("3 ችግር： ", String.valueOf(ch3));
             options.add(tempChoicePool.get(ch3));
             tempChoicePool.remove(ch3);
-            challenges.add(new Challenge(stat[0], options, 0));
+            challenges.add(new Challenge(stat[0], options, options.get(0)));
         }
         return challenges;
     }

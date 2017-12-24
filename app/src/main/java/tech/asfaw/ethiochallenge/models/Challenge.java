@@ -7,10 +7,10 @@ public class Challenge {
 
     private String mQuestion;
     private List<String> mOptions = new ArrayList<>();
-    private int mAnswerLocation;
+    private String mAnswer;
 
-    public int getAnswerLocation() {
-        return mAnswerLocation;
+    public String getAnswer() {
+        return mAnswer;
     }
 
     public String getQuestion() {
@@ -21,10 +21,10 @@ public class Challenge {
         return mOptions;
     }
 
-    public Challenge(String question, List<String> options, int answerLocation) {
+    public Challenge(String question, List<String> options, String answer) {
         mQuestion = question;
         mOptions = options;
-        mAnswerLocation = answerLocation;
+        mAnswer = answer;
     }
 
 }
