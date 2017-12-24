@@ -65,4 +65,10 @@ public class MainFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Idea! Put in a link within this class to randomly pick, either the buttons or the options
+     * and place them randomly with the buttons. maybe take some of the code from CSVParser.java
+     * the new RandomGenerator can help with what we wanna do...
+     */
+
 }

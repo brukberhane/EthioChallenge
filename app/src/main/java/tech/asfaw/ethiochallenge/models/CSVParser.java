@@ -27,22 +27,22 @@ class CSVParser {
 
     private List<Challenge> createChallenges(List<String[]> listofArrays, List<String> choicePool) {
         List<Challenge> challenges = new ArrayList<>();
-        Random rand = new Random();
+        RandomGenerator randGen = new RandomGenerator();
         for (int i = 0; i < listofArrays.size(); i++){
             String[] stat = listofArrays.get(i);
             List<String> tempChoicePool = new ArrayList<>(choicePool);
             List<String> options = new ArrayList<>();
             options.add(stat[1]);
             tempChoicePool.remove(stat[1]);
-            int ch1 = rand.nextInt(tempChoicePool.size());
+            int ch1 = randGen.getRandomInt(tempChoicePool.size());
             Log.i("1 ችግር： ", String.valueOf(ch1));
             options.add(tempChoicePool.get(ch1));
             tempChoicePool.remove(ch1);
-            int ch2 = rand.nextInt(tempChoicePool.size());
+            int ch2 = randGen.getRandomInt(tempChoicePool.size());
             Log.i("2 ችግር： ", String.valueOf(ch2));
             options.add(tempChoicePool.get(ch2));
             tempChoicePool.remove(ch2);
-            int ch3 = rand.nextInt(tempChoicePool.size());
+            int ch3 = randGen.getRandomInt(tempChoicePool.size());
             Log.i("3 ችግር： ", String.valueOf(ch3));
             options.add(tempChoicePool.get(ch3));
             tempChoicePool.remove(ch3);
