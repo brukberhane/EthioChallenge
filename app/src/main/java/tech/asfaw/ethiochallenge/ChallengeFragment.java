@@ -1,5 +1,6 @@
 package tech.asfaw.ethiochallenge;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -24,6 +25,8 @@ import tech.asfaw.ethiochallenge.models.Person;
 
 public class ChallengeFragment extends Fragment implements Button.OnClickListener{
     private static final String TAG = "ChallengeFragment";
+    public static final String DEFAULT_PLAYER_NAME = "Player 1";
+    public static final String QUESTION_STRING = "ትያቄ :";
 
     @SuppressWarnings("FieldCanBeLocal")
     private ChallengeLab mChallengeLab;
@@ -57,7 +60,7 @@ public class ChallengeFragment extends Fragment implements Button.OnClickListene
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        mPerson = new Person("");
+        mPerson = new Person(DEFAULT_PLAYER_NAME);
         mCurrentQuestion = 0;
         mChallengeResult = new HashMap<>();
         mPerson.setChallengeResults(mChallengeResult);
@@ -68,7 +71,6 @@ public class ChallengeFragment extends Fragment implements Button.OnClickListene
                              Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_challenge, container, false);
         ButterKnife.bind(this, view);
-        mFirstText.setText("ኣዲስ ኣፕሊኬሽን");
         mFirstText.setTextSize(20);
 
         mChallengeLab = new ChallengeLab(getActivity());
@@ -78,7 +80,7 @@ public class ChallengeFragment extends Fragment implements Button.OnClickListene
         mSecondChoiceButton.setOnClickListener(this);
         mThirdChoiceButton.setOnClickListener(this);
 
-        nextQuestion(0);
+        nextQuestion(mCurrentQuestion);
 
 //        Toast.makeText(getActivity(), tchallenge.getQuestion(), Toast.LENGTH_SHORT).show();
 
@@ -113,17 +115,20 @@ public class ChallengeFragment extends Fragment implements Button.OnClickListene
         } else{
             //TODO: Implement results page.
             Toast.makeText(getActivity(), "You're done! \\o/", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), HomeActivity.class);
+            getActivity().startActivity(intent);
         }
     }
 
     private void nextQuestion(int num){
-
+        mFirstText.setText(QUESTION_STRING + (num+1));
         mCurrentChallenge = mChallenges.get(num);
         mQuestionText.setText(mCurrentChallenge.getQuestion());
         mFirstChoiceButton.setText(mCurrentChallenge.getOptions().get(0));
         mSecondChoiceButton.setText(mCurrentChallenge.getOptions().get(1));
         mThirdChoiceButton.setText(mCurrentChallenge.getOptions().get(2));
         mFourthChoiceButton.setText(mCurrentChallenge.getOptions().get(3));
+
 
     }
 
