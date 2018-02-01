@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">EthioChallenge</string>
+    <string name="app_name">Ethio Challenge</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="start_the_challenge">Start Challenge</string>
-    <string name="welcome_text">Welcome to the EthioChallenge game! Begin playing to see how Ethiopian you are.</string>
+    <string name="welcome_text">Welcome to the EthioChallenge! Begin playing to see how Ethiopian you are:</string>
+    <string name="seconds_remaining"> Seconds :</string>
+    <string name="answer_this_question">Answer this question to move on!</string>
+    <string name="question_text">The Question?</string>
 </resources>

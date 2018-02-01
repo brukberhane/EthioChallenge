@@ -2,6 +2,7 @@ package tech.asfaw.ethiochallenge;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -39,11 +40,12 @@ public class ChallengeFragment extends Fragment implements Button.OnClickListene
     private HashMap<Challenge, String> mChallengeResult;
     private Challenge mCurrentChallenge;
 
-
     @BindView(R.id.text_view_fragment_main)
     TextView mFirstText;
     @BindView(R.id.question_text)
     TextView mQuestionText;
+    @BindView(R.id.text_view_timer)
+    TextView mTimerText;
     @BindView(R.id.first_choice)
     Button mFirstChoiceButton;
     @BindView(R.id.second_choice)
@@ -64,6 +66,20 @@ public class ChallengeFragment extends Fragment implements Button.OnClickListene
         mPerson = new Person(DEFAULT_PLAYER_NAME);
         mCurrentQuestion = 0;
         mChallengeResult = new HashMap<>();
+        new CountDownTimer(30000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                mTimerText.setText(" " + millisUntilFinished / 1000);
+                // store it in a variable
+            }
+
+            public void onFinish() {
+                // Disable buttons and display a message, then go to home screen.
+
+
+                mTimerText.setText("done!");
+            }
+        }.start();
     }
 
     @Override
